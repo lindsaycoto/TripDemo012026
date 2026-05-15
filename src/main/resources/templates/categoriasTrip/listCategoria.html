@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Categorias</title>
+
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+
+<body>
+		<header th:insert="~{fragments/menu :: menu-principal}"></header>
+<div class="container">
+
+    <h2>Lista de Categorías</h2>
+    <hr>
+
+    <div class="card">
+        <div class="card-body">
+
+            <a class="btn btn-primary" th:href="@{/categorias/create}" role="button">
+                Nueva
+            </a>
+
+            <hr>
+
+            <div th:if="${msg != null}" class="alert alert-success" th:text="${msg}"></div>
+
+            <table class="table table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="cat : ${categorias}">
+                        <td th:text="${cat.id}"></td>
+                        <td th:text="${cat.nombre}"></td>
+                        <td th:text="${cat.descripcion}"></td>
+
+                        <td>
+                            <a th:href="@{/categorias/edit/{id}(id=${cat.id})}" class="btn btn-success btn-sm" title="Editar">Editar
+							<i class="fas fa-pencil-alt"></i>
+							
+							</a>
+								
+                            <a th:href="@{/categorias/delete/{id}(id=${cat.id})}"
+                               onclick="return confirm('¿Estas seguro?')"
+                               class="btn btn-danger btn-sm"
+                               title="Eliminar">
+                               Eliminar
+							   <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>
+<footer th:insert="~{fragments/footer :: pie-pagina}" class="footer"></footer>
+
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
+		

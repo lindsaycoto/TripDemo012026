@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Formulario de Categorías</title>
+
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+</head>
+
+<body>
+<header th:insert="fragments/menu :: menu-principal"></header>
+<div class="container">
+
+    <h2>Formulario de Categorías</h2>
+    <hr>
+
+    <form th:action="@{/categorias/save}" method="post" th:object="${categoria}">
+
+        <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger" role="alert">
+            Por favor corrija los siguientes errores:
+            <ul>
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text"
+                           class="form-control"
+                           id="nombre"
+                           name="nombre"
+                           placeholder="Escriba el nombre de la categoria"
+                           required="required">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="descripcion">Descripcion</label>
+                    <textarea class="form-control"
+                              name="descripcion"
+                              id="descripcion"
+                              rows="2"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <button type="submit" class="btn btn-primary">
+            Guardar
+        </button>
+
+    </form>
+
+</div>
+<footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>
+			Trips
+		</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
+		      rel="stylesheet">
+		</head>
+		<body>
+		<img th:src="@{/images/logo.png}" width="136" height="136">	
+			<h1>Trips El Salvador</h1>
+			<table class="table table-hover">
+				<tr>
+					<td>Id</td>
+					<td>Nombre</td>
+					<td>fecha publicacion</td>
+					<td>Costo</td>
+					<td>Descripción</td>
+					<td>Destacado</td>
+					<td>Calificación</td>
+					<td>Detalle</td>
+				</tr>
+				
+				<tr th:each="trip : ${trips}">
+					<td><img th:src="@{/images/{img}(img=${trip.imagen})}" width="100" height="100"></td>
+					<td th:text="${trip.id}"></td>
+					<td th:text="${trip.nombre}"></td>
+					<td th:text="${trip.fecha}"></td>
+					<td th:text="${trip.costo}"></td>
+					<td th:text="${trip.descripcion}"></td>
+					<!--<td th:text="${trip.destacado == 1? 'Si' : 'No' }"></td>-->
+					<td>
+						<span th:if="${trip.destacado == 1}" class="badge bg-success">si</span>
+						<span th:unless="${trip.destacado == 1}" class="badge bg-danger">No</span>
+					</td>
+					<td>
+					<span th:text="${trip.calificacion}"
+					          th:class="${trip.calificacion >= 6} ? 'badge bg-success' : 'badge bg-danger'">
+					    </span>
+					
+				
+					</td>
+					
+					<td>
+						<a th:href="@{/trips/view/{id} (id=${trip.id}) }" class="btn btn-success">Detalle</a>
+					</td>
+					
+					<td>
+						<a th:href="@{/trips/delete/(id=${trip.id}) }" class="btn btn-success">Eliminar</a>
+					</td>
+
+
+					
+				</tr>
+			</table>
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+	
+		</body>
+		
+	
+</html>
